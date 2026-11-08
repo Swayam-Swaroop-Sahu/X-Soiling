@@ -1,0 +1,79 @@
+[
+  {
+    "model_name": "lightgbm",
+    "target": "soiling_ratio_daily",
+    "rmse": 0.00701344362344733,
+    "mae": 0.005580297411429556,
+    "r2": 0.112618161288047,
+    "pearson_r": 0.5174931208343523,
+    "spearman_rho": 0.5481318681318682,
+    "train_samples": 365,
+    "val_samples": 14
+  },
+  {
+    "model_name": "xgboost",
+    "target": "soiling_ratio_daily",
+    "rmse": 0.006707063511939765,
+    "mae": 0.00560390887969974,
+    "r2": 0.17887814445752312,
+    "pearson_r": 0.5256600669127474,
+    "spearman_rho": 0.5191208791208791,
+    "train_samples": 365,
+    "val_samples": 14
+  },
+  {
+    "model_name": "random_forest",
+    "target": "soiling_ratio_daily",
+    "rmse": 0.00629229056415879,
+    "mae": 0.005184595249066791,
+    "r2": 0.28844573980714516,
+    "pearson_r": 0.6148508354532117,
+    "spearman_rho": 0.5912087912087912,
+    "train_samples": 365,
+    "val_samples": 14
+  },
+  {
+    "model_name": "ridge",
+    "target": "soiling_ratio_daily",
+    "rmse": 0.00696144730431769,
+    "mae": 0.005780555098120632,
+    "r2": 0.10462139766196765,
+    "pearson_r": 0.5195197138091773,
+    "spearman_rho": 0.5358241758241759,
+    "train_samples": 365,
+    "val_samples": 14
+  },
+  {
+    "model_name": "mlp",
+    "target": "soiling_ratio_daily",
+    "rmse": 0.1783407871304604,
+    "mae": 0.15153702912612077,
+    "r2": -679.1033870928051,
+    "pearson_r": 0.0071682623620932025,
+    "spearman_rho": 0.012747252747252736,
+    "train_samples": 365,
+    "val_samples": 14
+  },
+  {
+    "model_name": "kimber",
+    "target": "soiling_ratio_daily",
+    "rmse": 0.00821240019044576,
+    "mae": 0.006765344435837105,
+    "r2": -0.29516620596110776,
+    "pearson_r": 0.3756218099411918,
+    "spearman_rho": 0.47477001493457366,
+    "train_samples": 365,
+    "val_samples": 14
+  },
+  {
+    "model_name": "piedra_gueymard",
+    "target": "soiling_ratio_daily",
+    "rmse": 0.010266840123483315,
+    "mae": 0.008567673813383987,
+    "r2": -0.9690193525413928,
+    "pearson_r": -0.05650367070953235,
+    "spearman_rho": -0.04060390878851284,
+    "train_samples": 365,
+    "val_samples": 14
+  }
+]

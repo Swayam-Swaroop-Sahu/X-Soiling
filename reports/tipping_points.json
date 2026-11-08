@@ -1,0 +1,19 @@
+{
+  "wind_resuspension_threshold_mps": 9.312291571537662,
+  "wind_v_crit_ci_lower_mps": 7.48,
+  "wind_v_crit_ci_upper_mps": 9.55,
+  "wind_structural_break_p_value": 0.00043467949808695394,
+  "critical_relative_humidity_pct": 72.0,
+  "rh_crit_ci_lower_pct": 68.5,
+  "rh_crit_ci_upper_pct": 75.5,
+  "cementation_dew_deficit_celsius": 2.8,
+  "dew_deficit_ci_lower_celsius": 2.45,
+  "dew_deficit_ci_upper_celsius": 3.15,
+  "wind_zero_crossing_mps": 8.27,
+  "wind_knee_point_mps": 15.82,
+  "confidence_score": 0.94,
+  "notes": {
+    "aerodynamic_theory": "Boundary layer shear lift stress overcomes van der Waals and capillary adhesion forces.",
+    "thermodynamic_theory": "Nocturnal deliquescence of soluble mineral salts under near-dew conditions produces cement crust."
+  }
+}

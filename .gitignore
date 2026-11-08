@@ -1,0 +1,24 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+# Paper Subfolder (Kept local, excluded from public git repository as requested)
+paper/
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+
+# Large checkpoints / temporary data (keep directories)
+data/processed/*.parquet
+!data/raw/.gitkeep

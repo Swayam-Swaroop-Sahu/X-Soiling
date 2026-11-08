@@ -1,0 +1,20 @@
+{
+  "lightgbm": {
+    "model_name": "lightgbm",
+    "target": "delta_soiling_ratio",
+    "rmse": 0.00675839019907141,
+    "mae": 0.0049712672767265225,
+    "r2": -0.08695023530753412,
+    "train_samples": 2020,
+    "val_samples": 60
+  },
+  "xgboost": {
+    "model_name": "xgboost",
+    "target": "delta_soiling_ratio",
+    "rmse": 0.006809076101042248,
+    "mae": 0.004985884959119282,
+    "r2": -0.10340673896409225,
+    "train_samples": 2020,
+    "val_samples": 60
+  }
+}
