@@ -13,7 +13,9 @@ xgboost>=2.0.0
 shap>=0.44.0
 kneed>=0.8.5
 
-# Visualization
+# Interactive Web Dashboard & Visualization
+streamlit>=1.30.0
+plotly>=5.18.0
 matplotlib>=3.8.0
 seaborn>=0.13.0
 
