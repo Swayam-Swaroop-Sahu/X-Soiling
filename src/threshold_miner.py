@@ -50,6 +50,22 @@ class DiscoveredTippingPoints:
     confidence_score: float
     notes: Dict[str, Any]
 
+    @property
+    def cementation_dew_deficit_ci_lower(self) -> float:
+        return self.dew_deficit_ci_lower_celsius
+
+    @property
+    def cementation_dew_deficit_ci_upper(self) -> float:
+        return self.dew_deficit_ci_upper_celsius
+
+    @property
+    def critical_rh_ci_lower(self) -> float:
+        return self.rh_crit_ci_lower_pct
+
+    @property
+    def critical_rh_ci_upper(self) -> float:
+        return self.rh_crit_ci_upper_pct
+
 
 class ThresholdMiner:
     """

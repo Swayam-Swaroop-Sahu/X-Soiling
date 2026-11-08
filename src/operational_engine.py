@@ -56,6 +56,22 @@ class OperationalEngine:
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
+    def evaluate_single_hour(
+        self,
+        row: Union[pd.Series, Dict[str, Any]],
+    ) -> CleaningDispatchDecision:
+        """
+        Evaluates a single observation or scenario row and returns a CleaningDispatchDecision.
+        """
+        if isinstance(row, pd.Series):
+            df = pd.DataFrame([row.to_dict()])
+        elif isinstance(row, dict):
+            df = pd.DataFrame([row])
+        else:
+            df = pd.DataFrame([row])
+        decisions, _ = self.evaluate_forecast(df)
+        return decisions[0]
+
     def evaluate_forecast(
         self,
         forecast_df: pd.DataFrame,
