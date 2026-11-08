@@ -45,15 +45,24 @@ class XAIEngine:
         self,
         model: Any,
         feature_names: List[str],
-        output_dirs: Optional[List[Union[str, Path]]] = None,
+        output_dirs: Optional[Union[List[Union[str, Path]], str, Path]] = None,
+        output_dir: Optional[Union[str, Path]] = None,
     ):
         self.model = model
         self.feature_names = feature_names
-        if output_dirs is None:
-            self.output_dirs = [Path("figures"), Path("paper/figures")]
-        else:
-            self.output_dirs = [Path(d) for d in output_dirs]
 
+        target_dirs = []
+        if output_dirs is not None:
+            if isinstance(output_dirs, (str, Path)):
+                target_dirs = [Path(output_dirs)]
+            else:
+                target_dirs = [Path(d) for d in output_dirs]
+        elif output_dir is not None:
+            target_dirs = [Path(output_dir)]
+        else:
+            target_dirs = [Path("figures"), Path("paper/figures")]
+
+        self.output_dirs = target_dirs
         for d in self.output_dirs:
             d.mkdir(parents=True, exist_ok=True)
 
