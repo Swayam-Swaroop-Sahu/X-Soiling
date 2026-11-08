@@ -12,6 +12,7 @@ venv/
 
 # Paper Subfolder (Kept local, excluded from public git repository as requested)
 paper/
+[Pp]aper*.zip
 *.aux
 *.bbl
 *.blg

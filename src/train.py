@@ -486,6 +486,41 @@ class ModelTrainer:
 
         return champion_type, champion_model, benchmark_df
 
+    def compare_and_select_best(
+        self,
+        X: pd.DataFrame,
+        y: pd.Series,
+        clean_df: pd.DataFrame,
+        target_name: str = "delta_soiling_ratio",
+    ) -> Tuple[str, Any, ValidationMetrics]:
+        """
+        Retrieves the pre-trained champion model or executes the comparative benchmark suite,
+        returning (champion_type, champion_model, champion_metrics).
+        """
+        # Attempt to load pre-trained champion if available in output_dir
+        for candidate in ["random_forest", "xgboost", "lightgbm"]:
+            key = f"{candidate}_{target_name}"
+            model_path = self.output_dir / f"{key}_model.pkl"
+            if model_path.exists():
+                try:
+                    with open(model_path, "rb") as f:
+                        data = pickle.load(f)
+                    met_dict = data.get("metrics", {})
+                    metrics = ValidationMetrics(**met_dict)
+                    self.models[key] = data["model"]
+                    self.metrics[key] = metrics
+                    logger.info("Loaded pre-trained champion model: %s (%s)", candidate.upper(), key)
+                    return candidate, data["model"], metrics
+                except Exception as e:
+                    logger.warning("Could not deserialize checkpoint for %s: %s", key, e)
+
+        # Fallback to full benchmark suite
+        champion_type, champion_model, benchmark_df = self.run_full_comparative_benchmark_suite(
+            X, y, clean_df, target_name=target_name
+        )
+        champion_metrics = self.metrics[f"{champion_type}_{target_name}"]
+        return champion_type, champion_model, champion_metrics
+
 
 if __name__ == "__main__":
     from src.data_loader import PVDataLoader

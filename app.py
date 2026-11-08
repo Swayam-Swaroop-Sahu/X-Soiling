@@ -34,42 +34,41 @@ from src.xai_engine import XAIEngine
 # 1. PAGE CONFIGURATION & CUSTOM DESIGN SYSTEM
 # ==============================================================================
 st.set_page_config(
-    page_title="X-Soiling | PV Physics & Explainable AI",
-    page_icon="☀️",
+    page_title="X-Soiling | PV Operations & Explainable AI",
+    page_icon="PV",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 CUSTOM_CSS = """
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
 
     html, body, [class*="css"] {
-        font-family: 'Outfit', sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     code, pre {
         font-family: 'JetBrains Mono', monospace !important;
     }
 
-    /* Main background & container styling */
+    /* Executive Theme Palette */
     .stApp {
-        background-color: #0b0f19;
+        background-color: #090d16;
         color: #f1f5f9;
     }
 
-    /* Custom Header Glassmorphism Card */
+    /* Executive Hero Card */
     .hero-card {
-        background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.7) 100%);
+        background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(15, 23, 42, 0.85) 100%);
         border: 1px solid rgba(56, 189, 248, 0.25);
-        box-shadow: 0 10px 30px -10px rgba(0, 229, 255, 0.15);
-        border-radius: 16px;
-        padding: 24px 30px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        border-radius: 12px;
+        padding: 24px 28px;
         margin-bottom: 24px;
-        backdrop-filter: blur(12px);
     }
 
-    /* Metric Cards */
+    /* Executive Metric Cards */
     .kpi-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -78,23 +77,22 @@ CUSTOM_CSS = """
     }
 
     .kpi-card {
-        background: rgba(15, 23, 42, 0.75);
-        border: 1px solid rgba(148, 163, 184, 0.15);
-        border-radius: 14px;
+        background: #111827;
+        border: 1px solid #1f2937;
+        border-radius: 10px;
         padding: 18px 20px;
-        transition: transform 0.2s ease, border-color 0.2s ease;
+        transition: border-color 0.2s ease;
     }
 
     .kpi-card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(56, 189, 248, 0.4);
+        border-color: #38bdf8;
     }
 
     .kpi-label {
-        font-size: 0.82rem;
-        font-weight: 500;
+        font-size: 0.75rem;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.08em;
         color: #94a3b8;
         margin-bottom: 6px;
     }
@@ -112,73 +110,83 @@ CUSTOM_CSS = """
         margin-top: 4px;
     }
 
-    /* Badges */
+    /* Corporate Badges */
     .badge-critical {
-        background-color: rgba(239, 68, 68, 0.2);
+        background-color: rgba(239, 68, 68, 0.15);
         color: #f87171;
         border: 1px solid #ef4444;
         padding: 3px 10px;
-        border-radius: 9999px;
+        border-radius: 4px;
         font-weight: 600;
         font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
         display: inline-block;
     }
     .badge-high {
-        background-color: rgba(245, 158, 11, 0.2);
+        background-color: rgba(245, 158, 11, 0.15);
         color: #fbbf24;
         border: 1px solid #f59e0b;
         padding: 3px 10px;
-        border-radius: 9999px;
+        border-radius: 4px;
         font-weight: 600;
         font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
         display: inline-block;
     }
     .badge-free {
-        background-color: rgba(16, 185, 129, 0.2);
+        background-color: rgba(16, 185, 129, 0.15);
         color: #34d399;
         border: 1px solid #10b981;
         padding: 3px 10px;
-        border-radius: 9999px;
+        border-radius: 4px;
         font-weight: 600;
         font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
         display: inline-block;
     }
     .badge-nominal {
-        background-color: rgba(148, 163, 184, 0.15);
+        background-color: rgba(148, 163, 184, 0.12);
         color: #94a3b8;
-        border: 1px solid #64748b;
+        border: 1px solid #475569;
         padding: 3px 10px;
-        border-radius: 9999px;
+        border-radius: 4px;
         font-weight: 600;
         font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
         display: inline-block;
     }
 
     /* Tab styling */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
+        border-bottom: 1px solid #1f2937;
     }
     .stTabs [data-baseweb="tab"] {
-        border-radius: 8px 8px 0px 0px;
+        border-radius: 6px 6px 0px 0px;
         padding: 10px 18px;
         font-weight: 600;
+        font-size: 0.88rem;
         color: #94a3b8;
     }
     .stTabs [aria-selected="true"] {
-        background-color: rgba(56, 189, 248, 0.15) !important;
+        background-color: rgba(56, 189, 248, 0.12) !important;
         color: #38bdf8 !important;
         border-bottom: 2px solid #38bdf8 !important;
     }
 
     /* Section divider */
     .section-title {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         font-weight: 700;
         color: #f1f5f9;
-        margin: 20px 0 12px 0;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        letter-spacing: 0.02em;
+        margin: 22px 0 14px 0;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #1f2937;
     }
 </style>
 """
@@ -245,12 +253,12 @@ with st.sidebar:
     navigation = st.radio(
         "Navigation",
         [
-            "📊 Overview & Real-Time Telemetry",
-            "🔬 Physical Tipping Points & XAI",
-            "🧪 What-If Weather Simulator",
-            "🚀 Smart Cleaning Dispatch & ROI",
-            "⚙️ Model Governance & Cross-Validation",
-            "📄 Research Paper & Publication Suite",
+            "Executive Telemetry & Asset Monitor",
+            "Physical Tipping Points & Explainability",
+            "Scenario Analysis & Weather Forensics",
+            "Operational Dispatch & Asset Optimization",
+            "Model Governance & Validation Metrics",
+            "Research Manuscript & Technical Suite",
         ],
         index=0,
     )
@@ -310,10 +318,10 @@ st.markdown(
 
 
 # ==============================================================================
-# VIEW 1: OVERVIEW & REAL-TIME TELEMETRY
+# VIEW 1: EXECUTIVE TELEMETRY & ASSET MONITOR
 # ==============================================================================
-if navigation == "📊 Overview & Real-Time Telemetry":
-    st.markdown('<div class="section-title">⚡ Live Plant Telemetry & Soiling Metrics</div>', unsafe_allow_html=True)
+if navigation == "Executive Telemetry & Asset Monitor":
+    st.markdown('<div class="section-title">Plant Telemetry & Operational Metrics</div>', unsafe_allow_html=True)
 
     # Extract latest observation
     latest_row = df.iloc[-1]
@@ -377,7 +385,7 @@ if navigation == "📊 Overview & Real-Time Telemetry":
         )
 
     # Time series range slider filter
-    st.markdown('<div class="section-title">📈 Dynamic Diurnal Performance & Atmospheric Drivers</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Dynamic Diurnal Performance & Atmospheric Telemetry</div>', unsafe_allow_html=True)
     view_window_days = st.slider("Observation Timeline Horizon (Days)", min_value=7, max_value=120, value=30, step=7)
     df_slice = df.iloc[-int(view_window_days * 24) :].copy()
 
@@ -486,15 +494,15 @@ if navigation == "📊 Overview & Real-Time Telemetry":
 
 
 # ==============================================================================
-# VIEW 2: PHYSICAL TIPPING POINTS & XAI STUDIO
+# VIEW 2: PHYSICAL TIPPING POINTS & EXPLAINABILITY
 # ==============================================================================
-elif navigation == "🔬 Physical Tipping Points & XAI":
-    st.markdown('<div class="section-title">🔬 Explainable AI: Discovered Physical Boundaries</div>', unsafe_allow_html=True)
+elif navigation == "Physical Tipping Points & Explainability":
+    st.markdown('<div class="section-title">Discovered Physical Boundaries & Attribution Studio</div>', unsafe_allow_html=True)
 
     tab_wind, tab_cement, tab_global = st.tabs([
-        "🌪️ Wind Resuspension Threshold (v_crit)",
-        "💧 The Cementation Cliff (2D Interactions)",
-        "🌐 Global Feature Attribution (SHAP)",
+        "Aerodynamic Resuspension Threshold (v_crit)",
+        "Moisture Cementation Cliff (2D Interactions)",
+        "Global Feature Attribution Hierarchy",
     ])
 
     # TAB 1: WIND RESUSPENSION
@@ -622,10 +630,10 @@ elif navigation == "🔬 Physical Tipping Points & XAI":
 
 
 # ==============================================================================
-# VIEW 3: WHAT-IF WEATHER SIMULATOR
+# VIEW 3: SCENARIO ANALYSIS & WEATHER FORENSICS
 # ==============================================================================
-elif navigation == "🧪 What-If Weather Simulator":
-    st.markdown('<div class="section-title">🧪 What-If Atmospheric Scenario Simulator & Risk Forensics</div>', unsafe_allow_html=True)
+elif navigation == "Scenario Analysis & Weather Forensics":
+    st.markdown('<div class="section-title">Atmospheric Scenario Simulation & Risk Forensics</div>', unsafe_allow_html=True)
     st.markdown(r"Simulate custom or extreme weather events and observe real-time inference on the soiling rate ($\Delta SR$) and dispatch alerts.")
 
     # Scenario Presets
@@ -702,7 +710,7 @@ elif navigation == "🧪 What-If Weather Simulator":
                 <span style="font-weight: 700; color: #f8fafc;">{res.action_rationale}</span>
             </div>
             <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 6px;">
-                💡 <b>Operational Impact:</b> {res.cost_water_saving_potential}
+                <b>Operational Impact:</b> {res.cost_water_saving_potential}
             </div>
         </div>
         """,
@@ -711,10 +719,10 @@ elif navigation == "🧪 What-If Weather Simulator":
 
 
 # ==============================================================================
-# VIEW 4: SMART CLEANING DISPATCH & ROI
+# VIEW 4: OPERATIONAL DISPATCH & ASSET OPTIMIZATION
 # ==============================================================================
-elif navigation == "🚀 Smart Cleaning Dispatch & ROI":
-    st.markdown('<div class="section-title">🚀 48-Hour Operational Cleaning Schedule & Economic ROI</div>', unsafe_allow_html=True)
+elif navigation == "Operational Dispatch & Asset Optimization":
+    st.markdown('<div class="section-title">48-Hour Operational Cleaning Schedule & Economic ROI</div>', unsafe_allow_html=True)
 
     forecast_df = op_engine.generate_sample_forecast(hours=48)
     decisions, summary = op_engine.evaluate_forecast(forecast_df)
@@ -775,7 +783,7 @@ elif navigation == "🚀 Smart Cleaning Dispatch & ROI":
     col_e1, col_e2 = st.columns(2)
     with col_e1:
         st.download_button(
-            "📥 Export Dispatch Plan (JSON)",
+            "Export Dispatch Plan (JSON)",
             data=json.dumps({"summary": summary, "schedule": [vars(d) for d in decisions]}, indent=2),
             file_name="operational_dispatch_plan.json",
             mime="application/json",
@@ -783,7 +791,7 @@ elif navigation == "🚀 Smart Cleaning Dispatch & ROI":
         )
     with col_e2:
         st.download_button(
-            "📥 Export Schedule (CSV)",
+            "Export Schedule (CSV)",
             data=decisions_df.to_csv(index=False),
             file_name="operational_dispatch_plan.csv",
             mime="text/csv",
@@ -792,10 +800,10 @@ elif navigation == "🚀 Smart Cleaning Dispatch & ROI":
 
 
 # ==============================================================================
-# VIEW 5: MODEL GOVERNANCE & PURGED CV METRICS
+# VIEW 5: MODEL GOVERNANCE & VALIDATION METRICS
 # ==============================================================================
-elif navigation == "⚙️ Model Governance & Cross-Validation":
-    st.markdown('<div class="section-title">⚙️ Model Validation & Anti-Leakage Governance</div>', unsafe_allow_html=True)
+elif navigation == "Model Governance & Validation Metrics":
+    st.markdown('<div class="section-title">Model Governance & Anti-Leakage Validation</div>', unsafe_allow_html=True)
     st.markdown(
         """
         Solar PV data exhibits strong diurnal autocorrelation. Standard random k-fold cross-validation
@@ -834,10 +842,10 @@ elif navigation == "⚙️ Model Governance & Cross-Validation":
 
 
 # ==============================================================================
-# VIEW 6: RESEARCH PAPER & PUBLICATION SUITE
+# VIEW 6: TECHNICAL MANUSCRIPT & RESEARCH SUITE
 # ==============================================================================
-elif navigation == "📄 Research Paper & Publication Suite":
-    st.markdown('<div class="section-title">📄 Research Manuscript & Publication Suite</div>', unsafe_allow_html=True)
+elif navigation == "Research Manuscript & Technical Suite":
+    st.markdown('<div class="section-title">Research Manuscript & Technical Dossier</div>', unsafe_allow_html=True)
     
     st.markdown(
         r"""
@@ -847,7 +855,7 @@ elif navigation == "📄 Research Paper & Publication Suite":
                 Discovering Non-Linear Physical Tipping Points in Solar Photovoltaic Soiling via Explainable AI: The Cementation Boundary and Aerodynamic Cleaning Threshold
             </h2>
             <div style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 12px;">
-                <strong>Antigravity AI Research Team</strong> &bull; <em>Applied Renewable Energy Systems & Aerosol Physics Division</em>
+                <strong>Swayam Swaroop Sahu</strong> &bull; <em>School of Electrical Engineering and Renewable Energy Systems</em>
             </div>
             <p style="font-size: 0.92rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 16px;">
                 <strong>Abstract:</strong> Solar photovoltaic (PV) performance degradation from airborne dust accumulation is governed by coupled thermodynamic and aerodynamic processes. This study presents a physics-informed Explainable AI (XAI) framework integrating SHAP TreeExplainer attribution and high-order interaction tensors with purged group walk-forward cross-validation on multi-site empirical cohorts. We empirically discover two foundational tipping points: (1) an aerodynamic wind resuspension threshold \(v_{\text{crit}} = 9.22\,\text{m/s}\) [95% CI: 7.16–9.57 m/s, Chow test \(p = 1.12 \times 10^{-3}\)], and (2) a non-linear cementation boundary occurring at dawn dew deficit \(T_{\text{deficit}} \le 2.80\,^\circ\text{C}\) and relative humidity \(\ge 72.0\%\). An 8,760-hour techno-economic simulation on a 50 MWp plant proves our predictive dispatch reduces LCOE by 10.5% and saves 38.5% of cleaning water.
@@ -865,7 +873,7 @@ elif navigation == "📄 Research Paper & Publication Suite":
         col_p1, col_p2 = st.columns([1, 3])
         with col_p1:
             st.download_button(
-                "📥 Download Compiled Manuscript (PDF)",
+                "Download Manuscript (PDF)",
                 data=pdf_bytes,
                 file_name="PV_Soiling_XAI_Tipping_Points.pdf",
                 mime="application/pdf",
@@ -875,9 +883,9 @@ elif navigation == "📄 Research Paper & Publication Suite":
             st.caption(f"Compiled PDF size: {len(pdf_bytes):,} bytes | MiKTeX 26.5 / pdfTeX engine with BibTeX citations.")
 
     tab_figs, tab_tables, tab_src = st.tabs([
-        "🖼️ Publication Figures (300 DPI & Vector PDF)",
-        "📊 Benchmark & Statistical Tables (LaTeX)",
-        "📜 LaTeX Source Code",
+        "Publication Figures (High-Resolution & Vector PDF)",
+        "Comparative Benchmarks & Statistical Tables",
+        "Manuscript Architecture & Source Code",
     ])
 
     with tab_figs:
